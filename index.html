@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Solipseum — место самости. В тишине сознания загорается свет." />
+  <title>Solipseum</title>
+  <style>
+    :root{
+      --bg1:#000000;
+      --bg2:#0b0b12;
+      --fg:#e6e6e6;
+      --muted:#bdbdbd;
+      --accent:#9ad0ff;
+      --accent-2:#a78bfa;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 800px at 50% 40%, #0f1020 0%, #070711 40%, #020207 70%, #000000 100%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
+
+    /* subtle starfield */
+    .stars, .stars:before, .stars:after{
+      position:absolute; inset:-50%;
+      content:"";
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.6) 98%, transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,.35) 98%, transparent),
+        radial-gradient(1.5px 1.5px at 40% 60%, rgba(255,255,255,.45) 98%, transparent),
+        radial-gradient(1px 1px at 85% 25%, rgba(255,255,255,.3) 98%, transparent);
+      animation: drift 140s linear infinite;
+      opacity:.25;
+    }
+    .stars:before{ animation-duration: 200s; opacity:.18; }
+    .stars:after{ animation-duration: 260s; opacity:.12; }
+
+    @keyframes drift{
+      from{ transform: translate3d(0,0,0) scale(1.05); }
+      to  { transform: translate3d(-2%, -4%, 0) scale(1.08); }
+    }
+
+    main{
+      position:relative;
+      padding:4rem 2rem 3rem;
+      z-index:2;
+    }
+
+    h1{
+      margin:0 0 1rem;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      line-height: 1.05;
+      /* neon-like layered glow */
+      text-shadow:
+        0 0 .5rem rgba(154,208,255,.35),
+        0 0 1.4rem rgba(154,208,255,.25),
+        0 0 2.2rem rgba(167,139,250,.18);
+      animation: glow 4.5s ease-in-out infinite;
+    }
+    @keyframes glow{
+      0%,100%{
+        filter: drop-shadow(0 0 10px rgba(154,208,255,.25));
+        opacity:.98;
+      }
+      50%{
+        filter: drop-shadow(0 0 18px rgba(167,139,250,.35));
+        opacity:1;
+        letter-spacing: .16em;
+      }
+    }
+
+    .tagline{
+      margin:0 auto 1.25rem;
+      max-width: 760px;
+      font-size: clamp(1rem, 2.6vw, 1.25rem);
+      line-height: 1.6;
+      color:var(--muted);
+      opacity:.9;
+    }
+
+    .divider{
+      width: 84px;
+      height: 2px;
+      margin: 1.25rem auto 1.25rem;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.85), transparent);
+      filter: drop-shadow(0 0 6px rgba(255,255,255,.35));
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform:scaleX(1); opacity:.95; }
+      50%{ transform:scaleX(1.12); opacity:.7; }
+    }
+
+    .footer{
+      margin-top: 1.25rem;
+      font-size: .9rem;
+      color:#9aa0a6;
+      opacity:.8;
+    }
+    .footer a{ color:#c3d6ff; text-decoration: none; border-bottom: 1px dotted rgba(195,214,255,.5); }
+    .footer a:hover{ opacity: .9; }
+
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main>
+    <h1>SOLIPSEUM</h1>
+    <div class="divider"></div>
+    <p class="tagline">«Во тьме бытия единственный наш огонь — осознавание.»<br/>In the vast darkness of existence, awareness is the single light we carry.</p>
+    <p class="footer">© <span id="y"></span> Solipseum. All rights reserved.</p>
+  </main>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
